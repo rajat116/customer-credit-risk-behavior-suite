@@ -195,7 +195,107 @@ Below are two real customer examples scored through the **Streamlit dashboard**.
 * Docker
 
 ---
+## 🐳 Running With Docker
 
+You can deploy the **FastAPI backend** inside Docker using the included `Dockerfile`.
+
+### **1️⃣ Build the Docker Image**
+
+Run this from the project root:
+
+```bash
+docker build -t credit-risk-api .
+```
+
+This creates an image named `credit-risk-api`.
+
+---
+
+### **2️⃣ Run the FastAPI Service in Docker**
+
+```bash
+docker run -p 8000:8000 credit-risk-api
+```
+
+The API will now be available at:
+
+* **[http://localhost:8000/health](http://localhost:8000/health)**
+* **[http://localhost:8000/docs](http://localhost:8000/docs)** (Swagger UI)
+
+---
+
+### **3️⃣ Use Streamlit With the Docker API**
+
+Streamlit **does not** run inside Docker (in this setup).
+You run Streamlit locally, and it will call the Dockerized API.
+
+Start Streamlit normally:
+
+```bash
+streamlit run monitoring/dashboard_streamlit.py
+```
+
+Then open:
+
+* **[http://localhost:8501](http://localhost:8501)**
+
+Make sure the API URL inside `dashboard_streamlit.py` matches:
+
+```python
+API_URL = "http://localhost:8000/predict"
+```
+
+---
+
+### **4️⃣ About Models and .gitignore**
+
+Since `models/*.pkl` are ignored by Git, remember:
+
+* Docker builds **must have the local `models/` directory present**
+* You should always train/retrain models locally first
+* Then Docker will copy them into the container during build:
+
+```dockerfile
+COPY models /app/models
+```
+
+If you retrain models → rebuild Docker:
+
+```bash
+docker build -t credit-risk-api .
+```
+
+---
+
+### **5️⃣ Stop the Docker Container**
+
+Find running containers:
+
+```bash
+docker ps
+```
+
+Stop it:
+
+```bash
+docker stop <container_id>
+```
+
+Remove it (optional):
+
+```bash
+docker rm <container_id>
+```
+
+---
+
+### **6️⃣ Optional: Run in Background**
+
+```bash
+docker run -d -p 8000:8000 credit-risk-api
+```
+
+---
 ## 📄 License
 
 MIT License — free to use, modify, and build upon.
