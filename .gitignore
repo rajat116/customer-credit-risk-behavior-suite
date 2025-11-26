@@ -1,0 +1,17 @@
+# Do not commit local secrets
+.env
+*.env
+.env.*
+apikey.txt
+secret.key
+*.key
+
+# VSCode / Codespaces files
+.vscode/
+*.code-workspace
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

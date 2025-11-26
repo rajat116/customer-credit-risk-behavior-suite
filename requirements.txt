@@ -13,3 +13,5 @@ uvicorn[standard]
 pydantic
 joblib
 streamlit
+google-generativeai
+python-dotenv
