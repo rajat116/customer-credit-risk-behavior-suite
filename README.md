@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./images/posterr.png" alt="Project Banner" width="100%">
+</p>
+
 # 📘 **Customer Credit Risk & Behaviour Scoring**
 
 A full end-to-end machine learning system for **credit risk assessment**, including:
