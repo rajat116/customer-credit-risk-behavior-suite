@@ -2,6 +2,9 @@
 
 FROM python:3.11-slim
 
+# Install OpenMP required for LightGBM
+RUN apt-get update && apt-get install -y libgomp1 && apt-get clean
+
 WORKDIR /app
 
 # Install dependencies

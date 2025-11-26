@@ -1,4 +1,8 @@
 # service/app.py
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -39,15 +43,18 @@ def predict_risk(payload: CustomerFeatures):
     kmeans = get_kmeans()
     iforest = get_iforest()
 
-    pd_score = float(pd_model.predict_proba(X_s)[0, 1])
-    expected_loss = float(lgd_model.predict(X_s)[0])
+    # -------- Correct calculations --------
+    pd_score = float(pd_model.predict_proba(X_s)[0, 1])      # PD
+    lgd = float(lgd_model.predict(X_s)[0])                   # LGD
+    expected_loss = pd_score * lgd                           # Correct Expected Loss
+
     cluster_id = int(kmeans.predict(X_s)[0])
     anomaly_raw = float(iforest.decision_function(X_s)[0])
     anomaly_score = float(-anomaly_raw)
 
     return RiskResponse(
         pd_score=pd_score,
-        expected_loss=expected_loss,
+        expected_loss=expected_loss,   # Correct EL
         cluster_id=cluster_id,
         anomaly_score=anomaly_score,
     )
