@@ -120,31 +120,6 @@ streamlit run monitoring/dashboard_streamlit.py
 [http://localhost:8501](http://localhost:8501)
 
 ---
-
-## 📈 Example Predictions
-
-### Good customer:
-
-* PD ≈ **0.05**
-* Expected Loss ≈ **400**
-* Cluster = **3**
-* Anomaly Score = small/negative
-* **AI Explanation:** “Low risk, strong repayment history, recommended to approve.”
-
-### Risky customer:
-
-* PD ≈ **0.80**
-* Expected Loss ≈ **13k**
-* Cluster = **3**
-* Anomaly Score = positive
-* **AI Explanation:** “Severe delinquencies, high expected loss, recommended to decline.”
-
-Here is the section **exactly in Markdown format**, including placeholders showing *exactly how to attach images* in GitHub.
-
-Copy-paste directly into your README.md:
-
----
-
 ## 📈 Example Predictions (Real Inputs + Screenshots)
 
 Below are two real customer examples scored through the **Streamlit dashboard**.
